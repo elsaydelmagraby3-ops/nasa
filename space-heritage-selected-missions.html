@@ -1,0 +1,1685 @@
+
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Explore the human-made artifacts left behind on the Moon and Mars through an interactive space heritage timeline.">
+  <title>Space Heritage — Human Footprints Beyond Earth</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080d19;
+      --panel: #101a2b;
+      --panel2: #142137;
+      --text: #edf3ff;
+      --muted: #9aa9c1;
+      --line: #263650;
+      --moon: #d8c7a4;
+      --mars: #f07855;
+      --cyan: #78dce8;
+      --good: #7ed6ad;
+      --shadow: 0 22px 70px #0008;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse at 12% 8%, #243d622e, transparent 34%),
+        radial-gradient(ellipse at 88% 32%, #b84e3020, transparent 30%),
+        linear-gradient(180deg, #080d19, #0b1220 55%, #080d19);
+    }
+
+    .stars,
+    .stars:before,
+    .stars:after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      content: "";
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff9 99%, transparent),
+        radial-gradient(1px 1px at 72% 11%, #fff8 99%, transparent),
+        radial-gradient(2px 2px at 43% 65%, #fff7 99%, transparent),
+        radial-gradient(1px 1px at 88% 78%, #fff8 99%, transparent),
+        radial-gradient(1px 1px at 24% 86%, #fff7 99%, transparent);
+      background-size: 330px 280px;
+      opacity: .45;
+    }
+
+    .stars:before {
+      transform: translate(90px, 40px);
+      opacity: .5;
+    }
+
+    .stars:after {
+      transform: translate(-55px, 100px);
+      opacity: .35;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    header {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ffffff12;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font: 700 17px "Space Grotesk";
+      letter-spacing: .3px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #ffffff30;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      box-shadow: 0 0 24px #78dce82b;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font: 500 10px "DM Sans";
+      letter-spacing: 2px;
+      margin-top: 2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    nav a { text-decoration: none; }
+    nav a:hover { color: white; }
+
+    .top-tag {
+      border: 1px solid #ffffff20;
+      border-radius: 30px;
+      padding: 8px 12px;
+      color: #c6d3e8;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      padding: 82px 0 55px;
+      text-align: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1 {
+      font: 600 clamp(38px, 7vw, 72px)/1.04 "Space Grotesk";
+      letter-spacing: -2.8px;
+      margin: 18px auto;
+      max-width: 850px;
+    }
+
+    h1 span {
+      background: linear-gradient(100deg, #f2e4c8, #fff 45%, #f08a69);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid #ffffff24;
+      background: #ffffff08;
+      color: var(--text);
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font: 600 13px "DM Sans";
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn.primary {
+      background: #e9ddc5;
+      color: #172033;
+      border-color: #e9ddc5;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .planet-stage {
+      height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(55px, 15vw, 190px);
+      margin: 5px auto 0;
+      position: relative;
+    }
+
+    .planet {
+      border-radius: 50%;
+      position: relative;
+      box-shadow: inset -18px -15px 30px #0008, 0 0 55px #ffffff12;
+    }
+
+    .planet.moon {
+      width: 92px;
+      height: 92px;
+      background: radial-gradient(circle at 28% 25%, #f1e8d5, #b5a98f 58%, #716b63);
+      box-shadow: inset -18px -15px 30px #0008, 0 0 45px #d8c7a42b;
+    }
+
+    .planet.moon:before,
+    .planet.moon:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: #746e6538;
+      box-shadow: inset 3px 3px 7px #0004;
+    }
+
+    .planet.moon:before {
+      width: 20px;
+      height: 20px;
+      left: 20px;
+      top: 23px;
+    }
+
+    .planet.moon:after {
+      width: 12px;
+      height: 12px;
+      right: 19px;
+      bottom: 20px;
+    }
+
+    .planet.mars {
+      width: 112px;
+      height: 112px;
+      background: radial-gradient(circle at 30% 25%, #ffb18b, #d45e3d 55%, #743326);
+      box-shadow: inset -22px -17px 30px #0009, 0 0 55px #f0785533;
+    }
+
+    .planet.mars:before {
+      content: "";
+      position: absolute;
+      inset: 20px 8px 35px 22px;
+      border-radius: 50%;
+      background: #7e352b38;
+      transform: rotate(-25deg);
+    }
+
+    .orbit {
+      position: absolute;
+      width: 240px;
+      height: 80px;
+      border: 1px solid #ffffff12;
+      border-radius: 50%;
+      transform: rotate(-12deg);
+    }
+
+    .planet-label {
+      position: absolute;
+      top: calc(50% + 66px);
+      font: 600 10px "Space Grotesk";
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 620px;
+      margin: 0 auto 58px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid #ffffff13;
+      background: #ffffff06;
+      border-radius: 13px;
+      text-align: center;
+    }
+
+    .stat strong {
+      font: 600 26px "Space Grotesk";
+      display: block;
+    }
+
+    .stat span {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      font: 600 28px "Space Grotesk";
+      margin: 0 0 7px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+      max-width: 550px;
+      line-height: 1.7;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      background: #ffffff08;
+      border: 1px solid #ffffff12;
+      padding: 5px;
+      border-radius: 12px;
+    }
+
+    .tab {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 10px 17px;
+      border-radius: 8px;
+      font: 600 13px "DM Sans";
+      cursor: pointer;
+    }
+
+    .tab.active[data-planet="moon"] {
+      background: #d8c7a4;
+      color: #1a2230;
+    }
+
+    .tab.active[data-planet="mars"] {
+      background: #f07855;
+      color: #25130f;
+    }
+
+    .tab.active[data-planet="other"] {
+      background: #78dce8;
+      color: #10202a;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px 0 28px;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 190px;
+      background: #101a2b;
+      border: 1px solid #ffffff18;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: white;
+      outline: none;
+      font: 13px "DM Sans";
+    }
+
+    .search:focus { border-color: #78dce8aa; }
+
+    select {
+      background: #101a2b;
+      border: 1px solid #ffffff18;
+      color: #dce6f6;
+      border-radius: 10px;
+      padding: 12px;
+      font: 13px "DM Sans";
+    }
+
+    .timeline-shell {
+      position: relative;
+      padding: 10px 0 30px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1080px;
+      margin: auto;
+    }
+
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--line) 5%, var(--line) 95%, transparent);
+      transform: translateX(-50%);
+    }
+
+    .event {
+      width: 50%;
+      position: relative;
+      padding: 0 42px 34px 0;
+    }
+
+    .event:nth-child(even) {
+      margin-left: 50%;
+      padding: 0 0 34px 42px;
+    }
+
+    .event:after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: 22px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent), 0 0 18px var(--accent);
+    }
+
+    .event:nth-child(even):after {
+      right: auto;
+      left: -5px;
+    }
+
+    .event-card {
+      background: linear-gradient(145deg, #142137, #0e1828);
+      border: 1px solid #ffffff16;
+      border-radius: 15px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: .25s;
+      box-shadow: 0 8px 30px #0002;
+      min-height: 100%;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent) 65%, #ffffff20);
+      box-shadow: 0 14px 38px #0005;
+    }
+
+    .event-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .event-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 150px;
+      max-height: 230px;
+      overflow: hidden;
+      border-radius: 11px;
+      margin-bottom: 15px;
+      background: radial-gradient(circle at 70% 25%, #78dce82a, transparent 35%), linear-gradient(135deg, #1d304a, #0b1423);
+      border: 1px solid #ffffff18;
+    }
+
+    .event-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+
+    .event-card:hover .event-image img {
+      transform: scale(1.04);
+    }
+
+    .image-placeholder {
+      height: 100%;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .image-placeholder b {
+      color: #dce8fa;
+      font: 600 12px "Space Grotesk";
+      margin-bottom: 5px;
+    }
+
+    .image-placeholder span {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .event-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .year {
+      font: 700 12px "Space Grotesk";
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    .type {
+      font-size: 10px;
+      color: #b6c5dc;
+      border: 1px solid #ffffff20;
+      padding: 5px 8px;
+      border-radius: 30px;
+      white-space: normal;
+      text-align: right;
+    }
+
+    .event-card h3 {
+      font: 600 19px "Space Grotesk";
+      line-height: 1.3;
+      margin: 0 0 7px;
+    }
+
+    .event-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 13px;
+      font-size: 10px;
+      color: #b9c8dd;
+    }
+
+    .status:before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--good);
+      flex-shrink: 0;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+      border: 1px dashed #ffffff25;
+      border-radius: 14px;
+    }
+
+    .note {
+      margin: 25px 0 65px;
+      padding: 17px 20px;
+      border: 1px solid #e5b86b35;
+      background: #e5b86b0b;
+      border-radius: 12px;
+      color: #c9c2b5;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .note strong { color: #f0d49d; }
+
+    footer {
+      border-top: 1px solid #ffffff12;
+      padding: 25px 0 35px;
+      color: #8493aa;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #aebed5;
+      text-decoration: none;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: #030711c9;
+      backdrop-filter: blur(9px);
+      display: none;
+      place-items: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal-backdrop.open { display: grid; }
+
+    .modal {
+      width: min(860px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #111d30;
+      border: 1px solid #ffffff24;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      position: relative;
+      animation: pop .22s ease;
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 14px;
+      border: 1px solid #ffffff20;
+      background: #ffffff09;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .modal-year {
+      font: 700 12px "Space Grotesk";
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .modal h2 {
+      font: 600 27px "Space Grotesk";
+      margin: 0 35px 12px 0;
+    }
+
+    .modal p {
+      color: #bac7d9;
+      font-size: 14px;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    .mission-media {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 430px;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid #ffffff1c;
+      background: radial-gradient(circle at 70% 25%, #78dce82a, transparent 35%), linear-gradient(135deg, #1d304a, #0b1423);
+      display: grid;
+      place-items: center;
+      margin: 20px 0 12px;
+    }
+
+    .mission-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .mission-media-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .mission-media-empty strong {
+      color: #e6efff;
+      font: 600 17px "Space Grotesk";
+    }
+
+    .media-icon {
+      color: var(--cyan);
+      font-size: 32px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .detail {
+      background: #ffffff08;
+      border: 1px solid #ffffff12;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .detail small {
+      display: block;
+      color: #8799b3;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .detail strong { font-size: 12px; }
+
+    .source-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--cyan);
+      font-size: 12px;
+      text-decoration: none;
+      border-bottom: 1px solid #78dce855;
+      padding-bottom: 3px;
+    }
+
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+
+      header { height: 65px; }
+      nav { display: none; }
+
+      .top-tag { font-size: 9px; }
+
+      .hero { padding: 62px 0 35px; }
+
+      h1 { letter-spacing: -1.8px; }
+
+      .hero p { font-size: 14px; }
+
+      .planet-stage {
+        height: 145px;
+        gap: 70px;
+      }
+
+      .planet.moon {
+        width: 70px;
+        height: 70px;
+      }
+
+      .planet.mars {
+        width: 86px;
+        height: 86px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7px;
+        margin-bottom: 45px;
+      }
+
+      .stat { padding: 13px 5px; }
+      .stat strong { font-size: 21px; }
+      .stat span { font-size: 9px; }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .section-head h2 { font-size: 24px; }
+
+      .tabs {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .tab {
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 11px;
+      }
+
+      .timeline { max-width: 100%; }
+
+      .timeline:before { left: 8px; }
+
+      .event,
+      .event:nth-child(even) {
+        width: 100%;
+        margin: 0;
+        padding: 0 0 20px 30px;
+      }
+
+      .event:after,
+      .event:nth-child(even):after {
+        left: 3px;
+        right: auto;
+        top: 20px;
+        width: 10px;
+        height: 10px;
+      }
+
+      .event-card { padding: 13px; }
+
+      .event-image {
+        min-height: 140px;
+        margin-bottom: 12px;
+      }
+
+      .event-card h3 { font-size: 17px; }
+      .event-card p { font-size: 12px; }
+
+      .modal { padding: 20px; }
+
+      .mission-media { min-height: 170px; }
+
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *:before,
+      *:after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+
+  <div class="wrap">
+
+    <header>
+      <div class="brand">
+        <div class="brand-mark">ES11</div>
+        <div>
+          SPACE HERITAGE
+          <small>HUMANITY'S FOOTPRINTS</small>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#explore">Explore</a>
+        <a href="#about">About</a>
+        <a href="#sources">Sources</a>
+      </nav>
+
+      <div class="top-tag">NASA SPACE APPS · 2026</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">A journey through space history</div>
+
+      <h1>
+        Humanity's Footprints<br>
+        <span>Beyond Earth.</span>
+      </h1>
+
+      <p>
+        We travelled to other worlds, explored their landscapes, and left
+        pieces of our history behind. Discover the spacecraft and instruments
+        that remain beyond Earth.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#explore">Explore the timeline ↗</a>
+        <a class="btn" href="#about">Why are they still there?</a>
+      </div>
+
+      <div class="planet-stage" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="planet moon"></div>
+        <div class="planet mars"></div>
+
+        <span class="planet-label" style="left:calc(50% - 125px)">
+          THE MOON
+        </span>
+
+        <span class="planet-label" style="left:calc(50% + 75px)">
+          MARS
+        </span>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Timeline statistics">
+      <div class="stat">
+        <strong id="missionCount">0</strong>
+        <span>Selected records</span>
+      </div>
+
+      <div class="stat">
+        <strong id="moonCount">0</strong>
+        <span>Moon records</span>
+      </div>
+
+      <div class="stat">
+        <strong id="marsCount">0</strong>
+        <span>Mars records</span>
+      </div>
+
+      <div class="stat">
+        <strong id="otherCount">0</strong>
+        <span>Other destinations</span>
+      </div>
+    </section>
+
+    <main id="explore">
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Explore the archive</div>
+          <h2>Choose a destination</h2>
+          <p>
+            Explore the selected lunar, Martian, asteroid, and deep-space
+            artifacts. Open a record to read its story.
+          </p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Choose a world">
+          <button class="tab active" data-planet="moon" role="tab" aria-selected="true">
+            ☾ The Moon
+          </button>
+
+          <button class="tab" data-planet="mars" role="tab" aria-selected="false">
+            ♂ Mars
+          </button>
+
+          <button class="tab" data-planet="other" role="tab" aria-selected="false">
+            ✦ Asteroids & Deep Space
+          </button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input
+          class="search"
+          id="search"
+          type="search"
+          placeholder="Search missions or equipment..."
+          aria-label="Search missions"
+        >
+
+        <select id="typeFilter" aria-label="Filter by equipment type">
+          <option value="all">All equipment types</option>
+        </select>
+
+        <select id="sortFilter" aria-label="Sort timeline">
+          <option value="oldest">Oldest first</option>
+          <option value="newest">Newest first</option>
+        </select>
+      </div>
+
+      <div class="timeline-shell">
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+    </main>
+
+    <section class="note" id="about">
+      <strong>Why do these objects remain?</strong><br>
+
+      Many missions were designed to stay on their destination after their
+      work was complete. Some were deliberately left behind, while others
+      stopped working because their power or mission lifetime ended. They are
+      physical records of humanity's exploration — not all of them are still
+      operational.
+    </section>
+
+    <footer id="sources">
+      <span>SPACE HERITAGE · An educational timeline</span>
+
+      <span>
+        Mission facts linked to
+        <a href="https://science.nasa.gov/" target="_blank" rel="noopener">
+          NASA Science
+        </a>
+        and the
+        <a href="https://nssdc.gsfc.nasa.gov/" target="_blank" rel="noopener">
+          NASA Space Science Data Coordinated Archive
+        </a>.
+      </span>
+    </footer>
+
+  </div>
+
+  <!-- Mission Details Modal -->
+  <div
+    class="modal-backdrop"
+    id="modalBackdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <article class="modal">
+
+      <button class="close" id="closeModal" aria-label="Close details">
+        ×
+      </button>
+
+      <div class="modal-year" id="modalYear"></div>
+
+      <h2 id="modalTitle"></h2>
+
+      <p id="modalDescription"></p>
+
+      <div class="mission-media" id="missionMedia">
+        <img id="missionImage" alt="Mission photograph">
+        <div class="mission-media-empty" id="missionImageEmpty" hidden>
+          <span class="media-icon">✦</span>
+          <strong>Mission image unavailable</strong>
+          <span>No photograph is configured for this mission.</span>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail">
+          <small>Destination</small>
+          <strong id="modalDestination"></strong>
+        </div>
+
+        <div class="detail">
+          <small>Equipment</small>
+          <strong id="modalType"></strong>
+        </div>
+
+        <div class="detail">
+          <small>Mission era</small>
+          <strong id="modalEra"></strong>
+        </div>
+
+        <div class="detail">
+          <small>Current status</small>
+          <strong id="modalStatus"></strong>
+        </div>
+
+      </div>
+
+      <a
+        class="source-link"
+        id="modalSource"
+        href="#"
+        target="_blank"
+        rel="noopener"
+      >
+        Explore NASA source ↗
+      </a>
+
+    </article>
+  </div>
+
+  <script>
+    // ==========================================
+    // MISSION DATABASE
+    // Change the image paths here to change photos.
+    // ==========================================
+
+    const missions = [
+
+      // ==========================================
+      // THE MOON
+      // ==========================================
+
+      {
+        id: "moon-apollo-modules",
+        planet: "moon",
+        sortYear: 1969,
+        year: "1969–1972",
+        title: "Apollo Lunar Modules",
+        type: "Lunar Module",
+        typeLabel: "Crewed Landing Hardware",
+        image: "images/apollo-lunar-module.jpg",
+        status: "Descent stages remain on the Moon",
+        summary: "The descent stages of Apollo Lunar Modules, including Apollo 11's Eagle, were left at their lunar landing sites.",
+        description: `Apollo Lunar Modules carried astronauts from lunar orbit down to the Moon's surface. After the astronauts completed their surface activities, the ascent stage lifted off to return them to lunar orbit, while the descent stage remained behind.
+
+The descent stage included the landing legs, descent engine, and other hardware used to reach the surface. Apollo 11's Lunar Module was named Eagle, and its descent stage was left at Tranquility Base in July 1969.
+
+These abandoned descent stages are among the most recognizable human-made artifacts on the Moon. They mark the locations where crews explored the lunar surface and represent the engineering achievements of the Apollo lunar landing program.`,
+        source: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+        era: "Apollo lunar landings: 1969–1972"
+      },
+
+      {
+        id: "moon-lrv",
+        planet: "moon",
+        sortYear: 1971,
+        year: "1971–1972",
+        title: "Lunar Roving Vehicles (LRVs)",
+        type: "Rover",
+        typeLabel: "Crewed Lunar Rover",
+        image: "images/lunar-rover.jpg",
+        status: "Three rovers remain parked on the Moon",
+        summary: "Three battery-powered lunar vehicles were driven by Apollo astronauts and left at their final exploration sites.",
+        description: `The Lunar Roving Vehicle was an electric, battery-powered vehicle used by astronauts during the later Apollo missions. It allowed crews to travel farther from their landing sites, carry equipment, and collect geological samples across a wider area.
+
+NASA used three Lunar Roving Vehicles on the Moon. They were driven during Apollo 15, Apollo 16, and Apollo 17. At the end of each mission, the rover was left on the lunar surface near the landing site.
+
+The three vehicles remain on the Moon as artifacts of human exploration. Their locations also help document the routes and areas investigated by the Apollo astronauts.`,
+        source: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+        era: "Used during Apollo 15, Apollo 16, and Apollo 17"
+      },
+
+      {
+        id: "moon-alsep",
+        planet: "moon",
+        sortYear: 1969.3,
+        year: "1969–1972",
+        title: "ALSEP Scientific Packages",
+        type: "Scientific Instruments",
+        typeLabel: "Lunar Science Equipment",
+        image: "images/alsep.jpg",
+        status: "Instruments remain at Apollo landing sites",
+        summary: "Apollo Lunar Surface Experiments Packages included instruments such as seismometers and retroreflectors, left to conduct science after the crews departed.",
+        description: `The Apollo Lunar Surface Experiments Packages (ALSEP) were collections of scientific instruments deployed by astronauts at several Apollo landing sites. They were designed to continue collecting information after the astronauts had returned to Earth.
+
+The packages included experiments such as seismometers, which detected movements in the lunar ground, along with other instruments that studied the Moon and its environment. Apollo crews also deployed laser-ranging retroreflectors, which allow scientists to measure the Earth–Moon distance with great precision.
+
+The equipment was left on the lunar surface when each mission ended. Although the powered ALSEP stations eventually stopped operating, some passive instruments, including the retroreflectors, remain useful for scientific measurements.`,
+        source: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+        era: "Deployed during Apollo missions, beginning in 1969"
+      },
+
+      {
+        id: "moon-surveyor",
+        planet: "moon",
+        sortYear: 1966,
+        year: "1966–1968",
+        title: "Surveyor Landers",
+        type: "Lander",
+        typeLabel: "Robotic Lunar Lander",
+        image: "images/surveyor.jpg",
+        status: "Mission completed · Landers remain on the Moon",
+        summary: "Robotic spacecraft sent in the 1960s to demonstrate that soft landings on the Moon were possible.",
+        description: `NASA's Surveyor program sent robotic spacecraft to the Moon during the 1960s. The landers were designed to demonstrate that spacecraft could make controlled, soft landings and to examine the lunar surface before crewed Apollo missions.
+
+Surveyor spacecraft returned photographs and engineering measurements that helped scientists and engineers understand the lunar soil and assess the conditions that future crewed landers would encounter. Some Surveyor missions also carried instruments for investigating the surface material.
+
+The Surveyor landers were not designed to return to Earth. Their remaining hardware became part of the human-made record on the Moon. Surveyor 3 is especially notable because Apollo 12 astronauts visited it in 1969 and returned selected components to Earth for examination.`,
+        source: "https://science.nasa.gov/mission/surveyor-3/",
+        era: "Surveyor missions: 1966–1968"
+      },
+
+      // ==========================================
+      // MARS
+      // ==========================================
+
+      {
+        id: "mars-sojourner",
+        planet: "mars",
+        sortYear: 1997,
+        year: "July 4, 1997",
+        title: "Sojourner Rover",
+        type: "Rover",
+        typeLabel: "Mars Rover",
+        image: "images/sojourner.jpg",
+        status: "Mission ended · Rover remains on Mars",
+        summary: "The first rover to operate on Mars, delivered to the surface by the Mars Pathfinder lander.",
+        description: `Sojourner was the small robotic rover carried to Mars by the Mars Pathfinder mission. Pathfinder landed on July 4, 1997, and delivered Sojourner to the Martian surface, where it became the first rover to operate successfully on another planet.
+
+The rover examined nearby rocks and soil, taking images and making measurements that helped demonstrate how mobile robots could explore the surface of Mars. It operated for 83 Martian days, far exceeding its planned technology-demonstration period.
+
+When communication with the Pathfinder mission ended, Sojourner remained at the landing site in Ares Vallis. Its rover hardware and the Pathfinder lander are now inactive artifacts of early Mars exploration.`,
+        source: "https://science.nasa.gov/mission/mars-pathfinder/",
+        era: "July 4, 1997: Landing · 1997: Surface operations"
+      },
+
+      {
+        id: "mars-spirit-opportunity",
+        planet: "mars",
+        sortYear: 2004,
+        year: "2004",
+        title: "Spirit & Opportunity Rovers",
+        type: "Rover",
+        typeLabel: "Mars Exploration Rovers",
+        image: "images/spirit-opportunity.jpg",
+        status: "Both missions ended · Rovers remain on Mars",
+        summary: "Twin Mars rovers that operated for years, exploring the planet and leaving their hardware at their final locations.",
+        description: `Spirit and Opportunity were twin robotic rovers sent to Mars to study rocks, soil, and the planet's environmental history. Spirit landed in Gusev Crater in January 2004, while Opportunity landed in Meridiani Planum later that month.
+
+Both rovers were designed for much shorter missions than they ultimately completed. They travelled across the Martian surface, examined geological features, and returned evidence that liquid water had affected parts of Mars in the distant past.
+
+Spirit's final communication was received in 2010. Opportunity continued operating until 2018, with NASA declaring its mission over in 2019. Both rovers remain on Mars at their final locations, serving as lasting artifacts of robotic exploration.`,
+        source: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+        era: "January 2004: Landings · 2010: Spirit ends · 2019: Opportunity ends"
+      },
+
+      {
+        id: "mars-viking",
+        planet: "mars",
+        sortYear: 1976,
+        year: "1976",
+        title: "Viking 1 & 2 Landers",
+        type: "Lander",
+        typeLabel: "Robotic Mars Landers",
+        image: "images/viking.jpg",
+        status: "Missions ended · Both landers remain on Mars",
+        summary: "The first U.S. landers to operate successfully on Mars, reaching the surface in 1976.",
+        description: `NASA's Viking 1 and Viking 2 missions delivered the first U.S. spacecraft to operate successfully on the surface of Mars. Viking 1 landed in July 1976, followed by Viking 2 in September of the same year.
+
+Each lander carried cameras, weather instruments, and equipment for collecting and analyzing samples of Martian soil. They returned images and direct measurements that greatly expanded scientific knowledge of the planet.
+
+The landers operated for different lengths of time before communication ended. Neither was designed to leave the surface, so both spacecraft remain at their original landing locations as human-made artifacts on Mars.`,
+        source: "https://science.nasa.gov/mission/viking-1/",
+        era: "July and September 1976: Landings"
+      },
+
+      {
+        id: "mars-phoenix-insight",
+        planet: "mars",
+        sortYear: 2008,
+        year: "2008–2018",
+        title: "Phoenix & InSight Landers",
+        type: "Lander",
+        typeLabel: "Robotic Mars Landers",
+        image: "images/phoenix-insight.jpg",
+        status: "Missions ended · Landers remain on Mars",
+        summary: "Phoenix investigated Martian water ice, while InSight studied marsquakes and the planet's interior.",
+        description: `Phoenix and InSight were stationary robotic landers sent to investigate different aspects of Mars. Phoenix landed in the planet's northern region in 2008 and used its robotic arm to dig into the soil, finding evidence of water ice beneath the surface.
+
+NASA's InSight lander arrived in 2018. It was designed to study the planet's deep interior, including its seismic activity. Its seismometer detected marsquakes and provided information about the structure and activity of Mars.
+
+Both missions eventually ended. Phoenix could no longer operate after the Martian winter, while InSight's power declined as dust accumulated on its solar panels. Their landers remain where they touched down.`,
+        source: "https://science.nasa.gov/mission/insight/",
+        era: "2008: Phoenix landing · 2018: InSight landing · Missions later ended"
+      },
+
+      {
+        id: "mars-ingenuity",
+        planet: "mars",
+        sortYear: 2021,
+        year: "April 19, 2021",
+        title: "Ingenuity Helicopter",
+        type: "Helicopter",
+        typeLabel: "Experimental Mars Aircraft",
+        image: "images/ingenuity.jpg",
+        status: "Mission ended · Helicopter remains stationary on Mars",
+        summary: "The first aircraft to achieve powered, controlled flight on another planet; its mission ended after rotor damage.",
+        description: `NASA's Ingenuity was a small robotic helicopter delivered to Mars with the Perseverance rover. Its purpose was to demonstrate that powered, controlled flight was possible in the thin atmosphere of another planet.
+
+Ingenuity completed its first flight on April 19, 2021, becoming the first aircraft to fly on another world. The technology demonstration was so successful that the helicopter went on to complete many additional flights and support the wider exploration effort by scouting terrain.
+
+In January 2024, NASA announced that Ingenuity's flight mission had ended after damage to its rotor blades. The helicopter remains on the Martian surface as a stationary artifact of the first powered flight campaign on another planet.`,
+        source: "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+        era: "April 19, 2021: First flight · January 2024: Mission ends"
+      },
+
+      // ==========================================
+      // ASTEROIDS & DEEP SPACE
+      // ==========================================
+
+      {
+        id: "other-dawn",
+        planet: "other",
+        sortYear: 2007,
+        year: "2007–2018",
+        title: "Dawn Spacecraft",
+        type: "Spacecraft",
+        typeLabel: "Asteroid-Belt Orbiter",
+        image: "images/dawn.jpg",
+        status: "Mission ended · Spacecraft remains in orbit around Ceres",
+        summary: "Dawn explored and mapped Vesta and Ceres before running out of fuel in orbit around Ceres.",
+        description: `NASA's Dawn spacecraft was launched to study two of the largest objects in the asteroid belt: Vesta and the dwarf planet Ceres. Using its ion propulsion system, Dawn became the first spacecraft to orbit two extraterrestrial destinations.
+
+The mission collected images and scientific measurements that helped researchers investigate the geology, composition, and history of these worlds. After completing its observations, Dawn continued orbiting Ceres.
+
+The spacecraft ran out of hydrazine fuel in 2018 and could no longer point its antennas or solar panels as needed. It remains in an unpowered orbit around Ceres.`,
+        source: "https://science.nasa.gov/mission/dawn/",
+        era: "2007: Launch · 2011–2012: Vesta · 2015–2018: Ceres · 2018: Mission ends"
+      },
+
+      {
+        id: "other-near-shoemaker",
+        planet: "other",
+        sortYear: 2001,
+        year: "February 12, 2001",
+        title: "NEAR Shoemaker",
+        type: "Spacecraft",
+        typeLabel: "Asteroid Orbiter and Lander",
+        image: "images/near-shoemaker.jpg",
+        status: "Mission ended · Spacecraft rests on asteroid Eros",
+        summary: "The first spacecraft to orbit an asteroid and then make a controlled landing on one.",
+        description: `NASA's Near Earth Asteroid Rendezvous (NEAR) Shoemaker spacecraft was sent to study the near-Earth asteroid 433 Eros. It entered orbit around Eros in 2000 and returned detailed images and measurements of the asteroid's surface and composition.
+
+At the end of its primary mission, the spacecraft was guided through a controlled descent and touched down on Eros on February 12, 2001. Although it was not originally designed as a lander, it continued transmitting data after touchdown.
+
+NEAR Shoemaker became the first spacecraft to orbit and land on an asteroid. It remains on the surface of Eros.`,
+        source: "https://science.nasa.gov/mission/near-shoemaker/",
+        era: "2000: Enters orbit around Eros · February 12, 2001: Touchdown"
+      },
+
+      {
+        id: "other-pioneer",
+        planet: "other",
+        sortYear: 1972,
+        year: "1972 & 1973",
+        title: "Pioneer 10 & 11",
+        type: "Spacecraft",
+        typeLabel: "Deep-Space Probes",
+        image: "images/pioneer.jpg",
+        status: "Missions ended · Spacecraft continue on outbound trajectories",
+        summary: "Early deep-space probes that explored the outer planets and continued travelling away from the Sun.",
+        description: `Pioneer 10 and Pioneer 11 were among the first spacecraft to explore the outer solar system. Pioneer 10 flew past Jupiter, while Pioneer 11 explored Jupiter and Saturn, returning important observations of the planets and their environments.
+
+After their planetary encounters, both spacecraft continued on trajectories carrying them outward through the solar system. Their missions eventually ended when communication became too weak for reliable contact.
+
+The probes are no longer operating, but they continue moving along their paths through space. They are lasting examples of humanity's first robotic journeys to the outer planets.`,
+        source: "https://science.nasa.gov/mission/pioneer-10/",
+        era: "1972: Pioneer 10 launch · 1973: Pioneer 11 launch"
+      },
+
+      {
+        id: "other-kepler",
+        planet: "other",
+        sortYear: 2009,
+        year: "2009–2018",
+        title: "Kepler Space Telescope",
+        type: "Space Telescope",
+        typeLabel: "Space Observatory",
+        image: "images/kepler.jpg",
+        status: "Mission ended · Telescope remains in an Earth-trailing orbit",
+        summary: "A pioneering space telescope that discovered thousands of exoplanet candidates before running out of fuel.",
+        description: `NASA's Kepler Space Telescope was designed to search for planets beyond our solar system. It monitored the brightness of stars, looking for the small, repeated dips in starlight that can occur when a planet passes in front of its star.
+
+Kepler transformed the study of exoplanets by showing that planets are common throughout the galaxy and by identifying thousands of candidate worlds. After its reaction-control fuel was depleted, the spacecraft could no longer maintain the precise pointing needed for its observations.
+
+NASA retired the telescope in 2018. Kepler remains in an Earth-trailing orbit, continuing its journey around the Sun without operating.`,
+        source: "https://science.nasa.gov/mission/kepler/",
+        era: "2009: Launch · 2018: Mission ends"
+      }
+
+    ];
+
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
+
+    const timeline = document.getElementById("timeline");
+    const search = document.getElementById("search");
+    const typeFilter = document.getElementById("typeFilter");
+    const sortFilter = document.getElementById("sortFilter");
+
+    const tabs = [...document.querySelectorAll(".tab")];
+
+    const backdrop = document.getElementById("modalBackdrop");
+
+    const missionImage = document.getElementById("missionImage");
+    const missionImageEmpty = document.getElementById("missionImageEmpty");
+
+    let activePlanet = "moon";
+    let activeMission = null;
+
+    // ==========================================
+    // UPDATE STATISTICS
+    // ==========================================
+
+    function updateStats() {
+      document.getElementById("missionCount").textContent = missions.length;
+
+      document.getElementById("moonCount").textContent =
+        missions.filter(m => m.planet === "moon").length;
+
+      document.getElementById("marsCount").textContent =
+        missions.filter(m => m.planet === "mars").length;
+
+      document.getElementById("otherCount").textContent =
+        missions.filter(m => m.planet === "other").length;
+    }
+
+    // ==========================================
+    // UPDATE EQUIPMENT FILTER
+    // ==========================================
+
+    function updateTypeOptions() {
+      const current = typeFilter.value;
+
+      const types = [
+        ...new Set(
+          missions
+            .filter(m => m.planet === activePlanet)
+            .map(m => m.type)
+        )
+      ];
+
+      typeFilter.innerHTML =
+        '<option value="all">All equipment types</option>' +
+        types.map(type =>
+          `<option value="${type.replace(/"/g, "&quot;")}">${type}</option>`
+        ).join("");
+
+      typeFilter.value = types.includes(current) ? current : "all";
+    }
+
+    // ==========================================
+    // RENDER MISSION IMAGE
+    // ==========================================
+
+    function refreshMissionImage() {
+      if (!activeMission) return;
+
+      const imagePath = activeMission.image;
+
+      if (imagePath) {
+        missionImage.src = imagePath;
+        missionImage.alt = activeMission.title + " photograph";
+        missionImage.hidden = false;
+        missionImageEmpty.hidden = true;
+      } else {
+        missionImage.removeAttribute("src");
+        missionImage.hidden = true;
+        missionImageEmpty.hidden = false;
+      }
+    }
+
+    // If an image file is missing, show a fallback.
+    missionImage.addEventListener("error", () => {
+      missionImage.hidden = true;
+      missionImageEmpty.hidden = false;
+    });
+
+    // ==========================================
+    // RENDER TIMELINE
+    // ==========================================
+
+    function render() {
+      const query = search.value.trim().toLowerCase();
+      const type = typeFilter.value;
+      const direction = sortFilter.value;
+
+      const accent =
+        activePlanet === "moon"
+          ? "#d8c7a4"
+          : activePlanet === "mars"
+            ? "#f07855"
+            : "#78dce8";
+
+      const items = missions
+        .filter(m => m.planet === activePlanet)
+        .filter(m => type === "all" || m.type === type)
+        .filter(m =>
+          `${m.title} ${m.summary} ${m.year} ${m.type} ${m.typeLabel} ${m.status}`
+            .toLowerCase()
+            .includes(query)
+        )
+        .sort((a, b) =>
+          direction === "oldest"
+            ? a.sortYear - b.sortYear
+            : b.sortYear - a.sortYear
+        );
+
+      timeline.style.setProperty("--accent", accent);
+      timeline.innerHTML = "";
+
+      if (!items.length) {
+        timeline.innerHTML = `
+          <div class="empty">
+            No missions match your search.
+            Try another keyword or filter.
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(m => {
+        const card = document.createElement("article");
+
+        card.className = "event";
+        card.style.setProperty("--accent", accent);
+
+        const imageHTML = m.image
+          ? `
+            <img
+              src="${m.image}"
+              alt="${m.title} mission photograph"
+              loading="lazy"
+            >
+          `
+          : `
+            <div class="image-placeholder">
+              <b>MISSION IMAGE</b>
+              <span>No image available</span>
+            </div>
+          `;
+
+        card.innerHTML = `
+          <div
+            class="event-card"
+            role="button"
+            tabindex="0"
+            aria-label="View details for ${m.title.replace(/"/g, "&quot;")}"
+          >
+
+            <div class="event-image">
+              ${imageHTML}
+            </div>
+
+            <div class="event-top">
+              <span class="year">${m.year}</span>
+              <span class="type">${m.typeLabel}</span>
+            </div>
+
+            <h3>${m.title}</h3>
+
+            <p>${m.summary}</p>
+
+            <span class="status">${m.status}</span>
+
+          </div>
+        `;
+
+        const open = () => showDetails(m);
+
+        const eventCard = card.querySelector(".event-card");
+
+        eventCard.addEventListener("click", open);
+
+        eventCard.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+          }
+        });
+
+        timeline.appendChild(card);
+      });
+    }
+
+    // ==========================================
+    // OPEN MISSION DETAILS
+    // ==========================================
+
+    function showDetails(m) {
+      activeMission = m;
+
+      document.getElementById("modalYear").textContent =
+        `${m.year} · ${m.era}`;
+
+      document.getElementById("modalYear").style.color =
+        m.planet === "moon"
+          ? "var(--moon)"
+          : m.planet === "mars"
+            ? "var(--mars)"
+            : "var(--cyan)";
+
+      document.getElementById("modalTitle").textContent = m.title;
+
+      document.getElementById("modalDescription").textContent =
+        m.description;
+
+      document.getElementById("modalDestination").textContent =
+        m.planet === "moon"
+          ? "The Moon"
+          : m.planet === "mars"
+            ? "Mars"
+            : "Asteroids & Deep Space";
+
+      document.getElementById("modalType").textContent = m.typeLabel;
+
+      document.getElementById("modalEra").textContent = m.era;
+
+      document.getElementById("modalStatus").textContent = m.status;
+
+      const sourceLink = document.getElementById("modalSource");
+
+      sourceLink.href = m.source;
+      sourceLink.textContent = "Open mission reference ↗";
+
+      refreshMissionImage();
+
+      backdrop.classList.add("open");
+
+      document.getElementById("closeModal").focus();
+    }
+
+    // ==========================================
+    // CLOSE MODAL
+    // ==========================================
+
+    function closeModal() {
+      backdrop.classList.remove("open");
+      activeMission = null;
+    }
+
+    document.getElementById("closeModal").addEventListener(
+      "click",
+      closeModal
+    );
+
+    backdrop.addEventListener("click", e => {
+      if (e.target === backdrop) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    });
+
+    // ==========================================
+    // DESTINATION TABS
+    // ==========================================
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+
+        activePlanet = tab.dataset.planet;
+
+        tabs.forEach(t => {
+          const active = t === tab;
+
+          t.classList.toggle("active", active);
+
+          t.setAttribute(
+            "aria-selected",
+            String(active)
+          );
+        });
+
+        search.value = "";
+
+        updateTypeOptions();
+        render();
+
+      });
+    });
+
+    // ==========================================
+    // SEARCH AND FILTERS
+    // ==========================================
+
+    [search, typeFilter, sortFilter].forEach(el => {
+      el.addEventListener("input", render);
+    });
+
+    // ==========================================
+    // INITIALIZE WEBSITE
+    // ==========================================
+
+    updateStats();
+    updateTypeOptions();
+    render();
+
+  </script>
+
+</body>
+</html>
