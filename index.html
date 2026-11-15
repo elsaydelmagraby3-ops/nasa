@@ -859,13 +859,154 @@
         transition: none !important;
       }
     }
+
+
+    /* ===== MISSION CINEMATICS: lightweight animated reenactments ===== */
+    .mission-cinema{position:relative;width:100%;aspect-ratio:16/9;min-height:230px;max-height:390px;margin:15px 0 18px;border:1px solid #72dffb35;border-radius:16px;overflow:hidden;background:#030916;isolation:isolate;box-shadow:0 16px 42px #0007}
+    .mission-cinema:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 80%,#16304b80,transparent 60%),radial-gradient(circle at 20% 20%,#ffffff18 1px,transparent 2px);background-size:auto,75px 65px;animation:cinemaStars 22s linear infinite}
+    .cinema-scene{position:absolute;inset:0;z-index:1;overflow:hidden}
+    .cinema-earth{position:absolute;width:85px;height:85px;left:9%;top:15%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#a8e8f5,#2676a7 52%,#102c58 78%);box-shadow:inset -15px -10px 20px #0009,0 0 35px #43b9ff45}
+    .cinema-moon{position:absolute;width:135px;height:135px;right:8%;bottom:-48px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#f2ead7,#a69d8d 60%,#514d4c);box-shadow:inset -22px -12px 28px #000b,0 0 35px #d8c7a433}
+    .cinema-mars{position:absolute;width:145px;height:145px;right:7%;bottom:-54px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#ffc09a,#ce6345 58%,#6b2b25);box-shadow:inset -23px -13px 27px #000b,0 0 35px #f0785544}
+    .cinema-ground{position:absolute;left:-5%;right:-5%;bottom:-26%;height:52%;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#b6a17c,#51473e 45%,#191c25);box-shadow:0 -12px 45px #d6b77a20}
+    .cinema-ground.red{background:linear-gradient(180deg,#d17b57,#743b32 48%,#251b22);box-shadow:0 -12px 45px #ed795220}
+    .cinema-stars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 20% 30%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 75% 18%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 55% 65%,#bdefff 50%,transparent 60%),radial-gradient(2px 2px at 90% 48%,#fff 50%,transparent 60%);background-size:170px 130px;opacity:.8}
+    .cinema-object{position:absolute;z-index:3;left:43%;top:37%;font-size:42px;filter:drop-shadow(0 0 14px #8be9ff66);transform-origin:center;}
+    .cinema-object svg{width:100%;height:100%;overflow:visible}
+    .cinema-trail{position:absolute;z-index:2;left:19%;top:49%;width:65%;height:2px;transform:rotate(-22deg);background:linear-gradient(90deg,transparent,#7ceaffaa,transparent);opacity:.7}
+    .cinema-label{position:absolute;z-index:5;left:16px;top:14px;color:#a9d9ec;font:700 9px 'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase}
+    .cinema-caption{position:absolute;z-index:5;left:16px;right:16px;bottom:13px;padding:10px 13px;border:1px solid #ffffff20;border-radius:10px;background:#06101dcc;backdrop-filter:blur(8px);color:#eaf6ff;font-size:11px;line-height:1.5}
+    .cinema-caption b{color:#8deaff;display:block;font-size:9px;letter-spacing:1.4px;margin-bottom:3px}
+    .cinema-replay{display:inline-flex;align-items:center;gap:7px;margin:0 0 14px;border:1px solid #72dffb55;background:#72dffb12;color:#c9f5ff;border-radius:9px;padding:8px 12px;font-size:11px;font-weight:700;cursor:pointer}
+    .mission-cinema[data-scene="apollo"] .apollo-descent{animation:apolloDescend 8s ease-in-out infinite}
+    .mission-cinema[data-scene="apollo"] .apollo-ascent{animation:apolloAscent 8s ease-in-out infinite}
+    .mission-cinema[data-scene="apollo"] .apollo-stage{animation:stageGlow 8s ease-in-out infinite}
+    .mission-cinema[data-scene="moon-rover"] .moving-rover{animation:roverDrive 7s ease-in-out infinite}
+    .mission-cinema[data-scene="deploy"] .deploy-unit{animation:deploy 6s ease-in-out infinite}
+    .mission-cinema[data-scene="surveyor"] .landing-probe{animation:probeLand 7s ease-in-out infinite}
+    .mission-cinema[data-scene="pathfinder"] .entry-capsule{animation:entry 7s ease-in-out infinite}
+    .mission-cinema[data-scene="mars-rover"] .moving-rover{animation:roverDrive 8s ease-in-out infinite}
+    .mission-cinema[data-scene="viking"] .landing-probe{animation:probeLand 8s ease-in-out infinite}
+    .mission-cinema[data-scene="lander"] .landing-probe{animation:probeLand 7s ease-in-out infinite}
+    .mission-cinema[data-scene="flight"] .flying-craft{animation:helicopterFlight 6s ease-in-out infinite}
+    .mission-cinema[data-scene="orbit"] .orbit-craft{animation:orbitPath 9s linear infinite;transform-origin:50% 50%}
+    .mission-cinema[data-scene="asteroid"] .asteroid-craft{animation:asteroidTouch 8s ease-in-out infinite}
+    .mission-cinema[data-scene="deep"] .deep-craft{animation:deepTravel 8s ease-in-out infinite}
+    .mission-cinema[data-scene="telescope"] .telescope-craft{animation:telescopeDrift 7s ease-in-out infinite}
+    @keyframes cinemaStars{to{background-position:120px 80px}}
+    @keyframes apolloDescend{0%,12%{transform:translate(0,-75px) rotate(-8deg)}45%,58%{transform:translate(0,55px) rotate(0)}65%,100%{transform:translate(0,55px) rotate(0);opacity:.15}}
+    @keyframes apolloAscent{0%,58%{transform:translate(0,55px);opacity:0}65%{opacity:1}100%{transform:translate(65px,-115px);opacity:1}}
+    @keyframes stageGlow{0%,55%{filter:drop-shadow(0 0 2px #fff)}65%,100%{filter:drop-shadow(0 0 16px #ffd58a)}}
+    @keyframes roverDrive{0%,15%{transform:translateX(-90px) rotate(0)}55%,70%{transform:translateX(35px) rotate(-2deg)}100%{transform:translateX(95px) rotate(0)}}
+    @keyframes deploy{0%,15%{transform:translateY(-65px) scale(.85);opacity:.2}55%{transform:translateY(28px) scale(1);opacity:1}75%,100%{transform:translateY(28px) scale(1);opacity:1}}
+    @keyframes probeLand{0%,10%{transform:translateY(-100px) rotate(-12deg)}45%{transform:translateY(8px) rotate(4deg)}58%,100%{transform:translateY(8px) rotate(0)}}
+    @keyframes entry{0%{transform:translate(-90px,-90px) rotate(-20deg)}35%{transform:translate(-25px,-30px) rotate(-8deg)}55%{transform:translate(15px,20px) rotate(0)}65%,100%{transform:translate(35px,45px) rotate(0)}}
+    @keyframes helicopterFlight{0%,15%{transform:translate(-65px,25px) rotate(-8deg)}50%{transform:translate(20px,-50px) rotate(5deg)}80%,100%{transform:translate(80px,-15px) rotate(0)}}
+    @keyframes orbitPath{from{transform:rotate(0deg) translateX(75px) rotate(0deg)}to{transform:rotate(360deg) translateX(75px) rotate(-360deg)}}
+    @keyframes asteroidTouch{0%,20%{transform:translate(-75px,-75px) rotate(-15deg)}55%{transform:translate(0,20px) rotate(0)}70%,100%{transform:translate(0,20px) rotate(0)}}
+    @keyframes deepTravel{0%{transform:translate(-95px,10px) rotate(-8deg)}100%{transform:translate(125px,-45px) rotate(8deg)}}
+    @keyframes telescopeDrift{0%,20%{transform:translate(-35px,15px) rotate(-12deg)}55%,100%{transform:translate(35px,-8px) rotate(8deg)}}
+    @media(max-width:520px){.mission-cinema{min-height:190px}.cinema-moon,.cinema-mars{width:105px;height:105px}.cinema-earth{width:60px;height:60px}.cinema-caption{font-size:10px}.cinema-object{font-size:34px}}
+    @media(prefers-reduced-motion:reduce){.mission-cinema *{animation:none!important}}
+
+    /* ===== SPACE HERITAGE STORY MODE ===== */
+    :root{--story-cyan:#72e5ff;--story-gold:#ffd58a;--story-panel:rgba(12,24,43,.82)}
+    body.story-mode{background:#050914}
+    #storyApp{position:relative;z-index:2;min-height:100vh;color:#eef6ff;font-family:"DM Sans",sans-serif;overflow:hidden}
+    #storyApp *{box-sizing:border-box}
+    .story-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 15% 20%,#163d6680,transparent 38%),radial-gradient(ellipse at 85% 65%,#7a3c2c40,transparent 32%),linear-gradient(150deg,#050914,#0a1427 55%,#080c19)}
+    .story-stars{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff9 50%,transparent 100%),radial-gradient(1px 1px at 70% 20%,#fff 50%,transparent 100%),radial-gradient(1px 1px at 45% 80%,#bdefff 50%,transparent 100%),radial-gradient(2px 2px at 90% 70%,#fff8 50%,transparent 100%);background-size:240px 220px;animation:starDrift 70s linear infinite}
+    @keyframes starDrift{to{transform:translate3d(-80px,60px,0)}}
+    .story-wrap{width:min(1160px,calc(100% - 36px));margin:auto}
+    .story-top{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff17;gap:14px}
+    .story-logo{font:700 16px "Space Grotesk";letter-spacing:1px}.story-logo small{display:block;color:#8fa6c2;font:600 9px "DM Sans";letter-spacing:2.2px;margin-top:4px}
+    .story-top-actions{display:flex;align-items:center;gap:10px}.story-pill{border:1px solid #ffffff24;background:#ffffff09;padding:9px 12px;border-radius:30px;color:#c8d8ec;font-size:11px}
+    .story-btn{border:1px solid #ffffff2c;background:#ffffff0c;color:#edf6ff;padding:12px 17px;border-radius:12px;font-weight:700;font-size:12px;cursor:pointer;transition:.25s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .story-btn:hover{transform:translateY(-3px);border-color:#72e5ff;box-shadow:0 8px 28px #48c8ff25}
+    .story-btn.primary{background:linear-gradient(110deg,#70e3f5,#a8f0e6);color:#071725;border:0}
+    .story-btn.gold{background:linear-gradient(110deg,#ffda98,#f4a96c);color:#21170b;border:0}
+    .story-hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;padding:64px 0 45px;min-height:490px}
+    .story-kicker{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--story-cyan);text-transform:uppercase}
+    .story-hero h1{font:700 clamp(40px,6.5vw,76px)/1.02 "Space Grotesk";letter-spacing:-3px;margin:17px 0}
+    .story-hero h1 span{background:linear-gradient(100deg,#fff0c9,#8be9ff 65%,#d2c3ff);color:transparent;background-clip:text}
+    .story-lead{color:#a9bad1;line-height:1.85;font-size:15px;max-width:550px}
+    .story-hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:24px}
+    .hero-art{height:340px;position:relative;display:grid;place-items:center;perspective:800px}
+    .hero-orbit{position:absolute;width:310px;height:110px;border:1px solid #8bdfff55;border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 35px #65dfff12}
+    .hero-world{width:210px;height:210px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#eafaff,#7898b0 27%,#253c5c 58%,#081322 78%);box-shadow:inset -30px -25px 45px #020713,0 0 70px #55cfff55;position:relative;animation:worldFloat 7s ease-in-out infinite}
+    .hero-world:before{content:"";position:absolute;width:48px;height:25px;border-radius:50%;background:#1b2a3e88;top:58px;left:45px;transform:rotate(-25deg);box-shadow:60px 65px 0 -5px #1b2a3e66,-18px 88px 0 -9px #1b2a3e66}
+    .hero-moon{position:absolute;width:58px;height:58px;border-radius:50%;right:15%;top:16%;background:radial-gradient(circle at 30% 28%,#fff2d8,#9c978b 65%,#454b57);box-shadow:0 0 30px #fff1}
+    .hero-mars{position:absolute;width:40px;height:40px;border-radius:50%;left:10%;bottom:17%;background:radial-gradient(circle at 30% 25%,#ffc39b,#c35d43 70%,#54291f);box-shadow:0 0 24px #e8755555}
+    @keyframes worldFloat{50%{transform:translateY(-12px) rotate(4deg)}}
+    .story-section{padding:32px 0 55px}.story-section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}.story-section h2{font:700 clamp(25px,4vw,36px) "Space Grotesk";margin:8px 0}.story-sub{color:#8fa4bf;font-size:13px;line-height:1.7;margin:0}
+    .progress-panel{display:flex;align-items:center;gap:15px;padding:15px 17px;border:1px solid #ffffff18;background:#ffffff08;border-radius:16px;min-width:230px}.progress-ring{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#75e7f4 var(--progress,0%),#ffffff18 0);position:relative;flex:none}.progress-ring:after{content:"";position:absolute;inset:5px;border-radius:50%;background:#0b172a}.progress-ring span{position:relative;z-index:1;font-size:10px;font-weight:800}.progress-copy b{display:block;font-size:12px}.progress-copy small{color:#8fa4bf;font-size:10px}
+    .chapter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.chapter-card{position:relative;min-height:170px;padding:20px;border-radius:17px;border:1px solid #ffffff1a;background:linear-gradient(145deg,#172943d9,#0b1629e8);overflow:hidden;cursor:pointer;transition:.25s}.chapter-card:hover{transform:translateY(-5px);border-color:#72e5ff88;box-shadow:0 18px 40px #0005}.chapter-card:after{content:attr(data-number);position:absolute;right:15px;bottom:-26px;font:700 100px "Space Grotesk";color:#ffffff08}.chapter-icon{font-size:27px}.chapter-card h3{font:700 17px "Space Grotesk";margin:13px 0 7px}.chapter-card p{color:#91a6c1;font-size:11px;line-height:1.7;max-width:260px;margin:0}.chapter-state{display:inline-block;margin-top:13px;font-size:9px;letter-spacing:1px;color:#8be9d0;text-transform:uppercase}
+    .story-missions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.story-mission{border:1px solid #ffffff19;background:#0e1b30;border-radius:16px;overflow:hidden;cursor:pointer;transition:.25s}.story-mission:hover{transform:translateY(-4px);border-color:#73dffb88;box-shadow:0 15px 38px #0005}.story-mission img{width:100%;height:150px;object-fit:cover;display:block;background:#1b2b43}.story-mission-content{padding:15px}.story-mission small{color:#72dff3;font-size:9px;letter-spacing:1px}.story-mission h3{font:700 15px "Space Grotesk";margin:7px 0}.story-mission p{color:#92a7c1;font-size:11px;line-height:1.65;margin:0}.mission-open{display:inline-block;color:#ffda98;font-size:10px;margin-top:12px;font-weight:700}
+    .guide-row{display:flex;align-items:center;gap:18px;padding:20px;border:1px solid #73dffb30;background:linear-gradient(100deg,#12304a99,#13213a99);border-radius:18px;margin:30px 0}.guide-avatar{width:68px;height:68px;flex:none;border-radius:22px;background:radial-gradient(circle at 35% 25%,#d4fbff,#4e9ab3 45%,#19324e 75%);display:grid;place-items:center;font-size:30px;box-shadow:0 0 35px #72e5ff2b}.guide-copy b{font:700 14px "Space Grotesk"}.guide-copy p{color:#a6bad2;font-size:12px;line-height:1.7;margin:6px 0 0}
+    .badge-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.badge-item{text-align:center;padding:15px 8px;border:1px solid #ffffff17;background:#ffffff07;border-radius:13px;opacity:.42;filter:grayscale(1)}.badge-item.unlocked{opacity:1;filter:none;border-color:#ffda9866;background:#ffda980d}.badge-item span{display:block;font-size:25px;margin-bottom:7px}.badge-item b{display:block;font-size:10px}.badge-item small{color:#8da2bc;font-size:9px}
+    .story-footer{padding:25px 0 35px;border-top:1px solid #ffffff15;color:#8095b1;font-size:10px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .story-modal{position:fixed;inset:0;z-index:30;background:#020611d9;backdrop-filter:blur(12px);display:none;place-items:center;padding:18px}.story-modal.open{display:grid}.story-dialog{width:min(760px,100%);max-height:92vh;overflow:auto;background:linear-gradient(145deg,#142640,#0a1425);border:1px solid #ffffff2b;border-radius:22px;padding:26px;position:relative;box-shadow:0 30px 100px #000b;animation:dialogIn .25s ease}.story-dialog h2{font:700 27px "Space Grotesk";margin:10px 35px 10px 0}.story-dialog p{color:#b2c2d7;font-size:13px;line-height:1.85;white-space:pre-line}.story-dialog img{width:100%;max-height:300px;object-fit:contain;border-radius:13px;background:#07101f;margin:10px 0}.story-close{position:absolute;right:15px;top:15px;width:34px;height:34px;border:1px solid #ffffff2b;border-radius:50%;background:#ffffff10;color:white;font-size:20px;cursor:pointer}.story-fact{padding:14px;border:1px solid #70dffb30;background:#69dfff0b;border-radius:12px;margin:15px 0;color:#c5d9ec;font-size:12px;line-height:1.7}.story-quiz{border-top:1px solid #ffffff1b;margin-top:18px;padding-top:16px}.story-quiz h3{font:700 15px "Space Grotesk"}.quiz-options{display:grid;gap:8px;margin:12px 0}.quiz-option{text-align:left;border:1px solid #ffffff20;background:#ffffff09;color:#dcecff;border-radius:10px;padding:12px;cursor:pointer;font-size:12px}.quiz-option:hover{border-color:#70e5f4}.quiz-option.correct{border-color:#73e1ad;background:#73e1ad18}.quiz-option.wrong{border-color:#ff8d83;background:#ff8d8318}.quiz-feedback{font-size:12px;min-height:20px;color:#9ee9c7}
+    .toast{position:fixed;right:20px;bottom:20px;z-index:50;background:#142b42;border:1px solid #79e5ee66;color:#effcff;padding:13px 17px;border-radius:12px;box-shadow:0 10px 35px #0008;transform:translateY(20px);opacity:0;pointer-events:none;transition:.3s;font-size:12px}.toast.show{transform:none;opacity:1}
+    .archive-switch{display:none;background:#0a1425;color:#eaf4ff;min-height:100vh;position:relative;z-index:3}.archive-switch.active{display:block}#storyApp.hidden{display:none}.archive-bar{position:sticky;top:0;z-index:8;padding:10px 18px;background:#0a1425ee;border-bottom:1px solid #ffffff20;display:flex;justify-content:space-between;align-items:center;gap:10px}.archive-bar button{background:#75e4f1;color:#071725;border:0;border-radius:9px;padding:9px 13px;font-weight:700;cursor:pointer}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:800px){.story-hero{grid-template-columns:1fr;padding-top:45px;gap:0}.hero-art{height:270px;grid-row:1}.hero-world{width:170px;height:170px}.story-hero-copy{text-align:center}.story-lead{margin:auto}.story-hero-actions{justify-content:center}.chapter-grid,.story-missions{grid-template-columns:repeat(2,1fr)}.badge-grid{grid-template-columns:repeat(3,1fr)}.story-section-head{align-items:start;flex-direction:column}.progress-panel{width:100%}}
+    @media(max-width:520px){.story-wrap{width:calc(100% - 26px)}.story-top{height:65px}.story-pill{display:none}.story-logo{font-size:13px}.story-hero h1{font-size:43px;letter-spacing:-2px}.hero-art{height:235px}.hero-world{width:145px;height:145px}.hero-orbit{width:230px}.chapter-grid,.story-missions{grid-template-columns:1fr}.chapter-card{min-height:145px}.story-mission img{height:180px}.guide-row{align-items:flex-start}.guide-avatar{width:54px;height:54px;border-radius:17px}.badge-grid{grid-template-columns:repeat(3,1fr)}.story-dialog{padding:20px}.story-dialog h2{font-size:22px}}
+    @media(prefers-reduced-motion:reduce){#storyApp *,#storyApp *:before,#storyApp *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
   </style>
 </head>
 
 <body>
   <div class="stars"></div>
 
-  <div class="wrap">
+
+  <div id="storyApp">
+    <div class="story-bg"></div><div class="story-stars"></div>
+    <div class="story-wrap">
+      <header class="story-top">
+        <div class="story-logo">✦ SPACE HERITAGE<small>THE LOST FOOTPRINTS · INTERACTIVE EXPEDITION</small></div>
+        <div class="story-top-actions"><span class="story-pill">EXPLORER LEVEL <b id="explorerLevel">01</b></span><button class="story-btn" id="openArchiveTop">NASA ARCHIVE ↗</button></div>
+      </header>
+      <section class="story-hero">
+        <div class="story-hero-copy">
+          <div class="story-kicker">A mission from the future · classified transmission</div>
+          <h1>The universe is full of <span>footprints.</span></h1>
+          <p class="story-lead">A long time ago, explorers travelled beyond Earth. They left machines, tools, and clues behind. Your mission is to discover their stories, solve space mysteries, and become a Space Heritage Explorer.</p>
+          <div class="story-hero-actions"><button class="story-btn primary" id="startJourney">START YOUR EXPEDITION <span>→</span></button><button class="story-btn" id="scrollChapters">VIEW THE MAP ↓</button></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of planets in space"><div class="hero-orbit"></div><div class="hero-world"></div><div class="hero-moon"></div><div class="hero-mars"></div></div>
+      </section>
+      <section class="guide-row reveal"><div class="guide-avatar">✦</div><div class="guide-copy"><b>Meet NOVA — your mission guide</b><p id="novaMessage">Hello, explorer! I'm NOVA. I'll guide you through the places where human-made machines still rest. Ready to uncover their stories?</p></div></section>
+      <section class="story-section" id="chapters">
+        <div class="story-section-head"><div><div class="story-kicker">Your expedition map</div><h2>Choose your next destination</h2><p class="story-sub">Every world holds a chapter. Explore them in any order and collect your discoveries.</p></div><div class="progress-panel"><div class="progress-ring" id="progressRing"><span id="progressPercent">0%</span></div><div class="progress-copy"><b id="progressTitle">Your journey begins</b><small id="progressDetail">0 of 3 chapters completed</small></div></div></div>
+        <div class="chapter-grid">
+          <article class="chapter-card reveal" data-chapter="moon" data-number="01"><div class="chapter-icon">🌕</div><h3>Chapter 01 · The Moon</h3><p>Follow the first human footprints and discover the machines left at lunar landing sites.</p><span class="chapter-state" id="state-moon">● READY TO EXPLORE</span></article>
+          <article class="chapter-card reveal" data-chapter="mars" data-number="02"><div class="chapter-icon">🔴</div><h3>Chapter 02 · The Red Planet</h3><p>Meet the rovers, landers, and the tiny helicopter that flew above another world.</p><span class="chapter-state" id="state-mars">● READY TO EXPLORE</span></article>
+          <article class="chapter-card reveal" data-chapter="other" data-number="03"><div class="chapter-icon">🪐</div><h3>Chapter 03 · Beyond</h3><p>Travel to asteroids and deep space to find the probes still journeying through the dark.</p><span class="chapter-state" id="state-other">● READY TO EXPLORE</span></article>
+        </div>
+      </section>
+      <section class="story-section" id="discoveries">
+        <div class="story-section-head"><div><div class="story-kicker" id="missionEyebrow">MISSION SELECT</div><h2 id="missionHeading">Your discoveries await</h2><p class="story-sub" id="missionSub">Choose a chapter on the map to reveal its missions.</p></div><button class="story-btn" id="showAllMissions">SHOW ALL MISSIONS</button></div>
+        <div class="story-missions" id="storyMissions"><div class="chapter-card"><h3>Transmission incoming…</h3><p>Select a destination above to begin.</p></div></div>
+      </section>
+      <section class="story-section" id="collection"><div class="story-section-head"><div><div class="story-kicker">YOUR COLLECTION</div><h2>Explorer badges</h2><p class="story-sub">Complete chapters and answer mission questions to unlock your collection.</p></div></div>
+        <div class="badge-grid" id="badgeGrid">
+          <div class="badge-item" id="badge-moon"><span>🌙</span><b>Moon Explorer</b><small>Complete Moon chapter</small></div>
+          <div class="badge-item" id="badge-mars"><span>🔴</span><b>Mars Pioneer</b><small>Complete Mars chapter</small></div>
+          <div class="badge-item" id="badge-other"><span>🚀</span><b>Deep Space Scout</b><small>Complete Beyond chapter</small></div>
+          <div class="badge-item" id="badge-quiz"><span>🧠</span><b>Sharp Mind</b><small>Answer a quiz correctly</small></div>
+          <div class="badge-item" id="badge-curious"><span>🔭</span><b>Curious Explorer</b><small>Discover 5 missions</small></div>
+          <div class="badge-item" id="badge-master"><span>🏆</span><b>Space Historian</b><small>Complete all chapters</small></div>
+        </div>
+      </section>
+      <footer class="story-footer"><span>SPACE HERITAGE · THE LOST FOOTPRINTS</span><span>Historical mission information is based on NASA references. Story elements are an educational adventure.</span></footer>
+    </div>
+    <div class="story-modal" id="storyModal" role="dialog" aria-modal="true"><article class="story-dialog"><button class="story-close" id="storyClose" aria-label="Close">×</button><div class="story-kicker" id="storyModalKicker">MISSION LOG</div><h2 id="storyModalTitle"></h2><p id="storyModalText"></p><div id="missionCinema" class="mission-cinema" aria-label="Animated mission reenactment"></div><button class="cinema-replay" id="replayCinema" type="button">↻ REPLAY THE MISSION</button><img id="storyModalImage" alt="Mission image"><div class="story-fact" id="storyFact"></div><div class="story-quiz"><h3 id="quizQuestion">Mission check</h3><div class="quiz-options" id="quizOptions"></div><div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><a class="story-btn" id="storySource" target="_blank" rel="noopener">READ NASA SOURCE ↗</a><button class="story-btn primary" id="nextStoryMission">BACK TO EXPEDITION</button></div></article></div>
+    <div class="toast" id="storyToast" role="status"></div>
+  </div>
+  <div class="archive-bar" id="archiveBar" style="display:none"><b>NASA HERITAGE ARCHIVE</b><button id="backToStory">← BACK TO STORY MODE</button></div>
+
+  <div class="wrap" id="originalArchive" style="display:none">
 
     <header>
       <div class="brand">
@@ -1678,6 +1819,105 @@ NASA retired the telescope in 2018. Kepler remains in an Earth-trailing orbit, c
     updateStats();
     updateTypeOptions();
     render();
+
+
+    // ==========================================
+    // STORY MODE: chapters, progress, rewards
+    // Original NASA mission records above remain unchanged.
+    // ==========================================
+    const storyState = JSON.parse(localStorage.getItem('spaceHeritageProgress') || '{"chapters":[],"visited":[],"badges":[]}');
+    const storyNames = {moon:'The Moon',mars:'Mars',other:'Beyond'};
+    const chapterQuizzes = {
+      moon:{q:'What remained on the Moon after Apollo astronauts left?',o:['The descent stage of the Lunar Module','A working space station','A Mars rover'],a:0,why:'The Lunar Module ascent stage returned to lunar orbit. Its descent stage stayed on the lunar surface.'},
+      mars:{q:'Which Mars machine became the first aircraft to fly on another world?',o:['Sojourner','Ingenuity','Viking 1'],a:1,why:'Ingenuity completed its first powered, controlled flight on Mars on April 19, 2021.'},
+      other:{q:'What did the NEAR Shoemaker spacecraft do at the end of its mission?',o:['Landed on asteroid Eros','Returned to Earth','Landed on the Moon'],a:0,why:'NEAR Shoemaker touched down on asteroid 433 Eros on February 12, 2001.'}
+    };
+    let currentChapter='moon', currentStoryMission=null, quizAnswered=false;
+    const storyApp=document.getElementById('storyApp'), archive=document.getElementById('originalArchive'), archiveBar=document.getElementById('archiveBar');
+    function saveStory(){localStorage.setItem('spaceHeritageProgress',JSON.stringify(storyState));updateStoryProgress();}
+    function toastStory(message){const t=document.getElementById('storyToast');t.textContent=message;t.classList.add('show');clearTimeout(window.storyToastTimer);window.storyToastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
+    function awardBadge(id,message){if(!storyState.badges.includes(id)){storyState.badges.push(id);document.getElementById('badge-'+id)?.classList.add('unlocked');toastStory('🏅 Badge unlocked: '+message);}}
+    function updateStoryProgress(){
+      const done=storyState.chapters.length,percent=Math.round(done/3*100);
+      document.getElementById('progressRing').style.setProperty('--progress',percent+'%');document.getElementById('progressPercent').textContent=percent+'%';
+      document.getElementById('progressTitle').textContent=done===3?'Expedition complete!':done===0?'Your journey begins':'Great discoveries!';document.getElementById('progressDetail').textContent=done+' of 3 chapters completed';
+      document.getElementById('explorerLevel').textContent=String(1+done).padStart(2,'0');
+      ['moon','mars','other'].forEach(k=>{const completed=storyState.chapters.includes(k);document.getElementById('state-'+k).textContent=completed?'✓ CHAPTER COMPLETED':'● READY TO EXPLORE';document.getElementById('badge-'+k).classList.toggle('unlocked',completed);});
+      storyState.badges.forEach(id=>document.getElementById('badge-'+id)?.classList.add('unlocked'));
+      if(done===3){awardBadge('master','Space Historian');}
+    }
+    function renderStoryMissions(chapter){
+      currentChapter=chapter;const list=missions.filter(m=>m.planet===chapter);document.getElementById('missionEyebrow').textContent='CHAPTER · '+storyNames[chapter].toUpperCase();document.getElementById('missionHeading').textContent=chapter==='moon'?'The footprints on the Moon':chapter==='mars'?'Secrets of the Red Planet':'Messages from deep space';document.getElementById('missionSub').textContent='Open a discovery to read its story, explore the NASA facts, and test what you learned.';
+      const container=document.getElementById('storyMissions');container.innerHTML='';
+      list.forEach((m,i)=>{const card=document.createElement('article');card.className='story-mission reveal';card.innerHTML=`${m.image?`<img src="${m.image}" alt="${m.title}" loading="lazy">`:'<div style="height:150px;display:grid;place-items:center;font-size:38px">✦</div>'}<div class="story-mission-content"><small>DISCOVERY ${String(i+1).padStart(2,'0')} · ${m.year}</small><h3>${m.title}</h3><p>${m.summary}</p><span class="mission-open">OPEN DISCOVERY →</span></div>`;card.addEventListener('click',()=>openStoryMission(m));container.appendChild(card);});
+      observeReveals();document.getElementById('discoveries').scrollIntoView({behavior:'smooth',block:'start'});
+      document.getElementById('novaMessage').textContent=`Great choice! We're exploring ${storyNames[chapter]}. Open the discoveries, look for clues, and answer the mission check to earn your explorer badge.`;
+    }
+    // A lightweight animated reenactment for each selected NASA record.
+    // These are illustrative educational animations, not original NASA footage.
+    const missionScenes={
+      'moon-apollo-modules':{type:'apollo',label:'APOLLO 11 · LUNAR LANDING',step:'The Lunar Module descends toward the Moon. The descent stage stays behind as the ascent stage lifts off.',world:'moon',craft:'apollo'},
+      'moon-lrv':{type:'moon-rover',label:'APOLLO LUNAR ROVER',step:'Astronauts drive the battery-powered rover across the lunar surface to explore farther from the landing site.',world:'moon',craft:'rover'},
+      'moon-alsep':{type:'deploy',label:'ALSEP · SCIENCE ON THE MOON',step:'Astronauts deploy scientific instruments that continue studying the lunar environment after the crew departs.',world:'moon',craft:'antenna'},
+      'moon-surveyor':{type:'surveyor',label:'SURVEYOR · SOFT LANDING',step:'The robotic lander slows its descent and settles onto the lunar surface to test landing conditions.',world:'moon',craft:'lander'},
+      'mars-sojourner':{type:'pathfinder',label:'MARS PATHFINDER · 1997',step:'The Pathfinder entry system travels through the Martian atmosphere and delivers the Sojourner rover to the surface.',world:'mars',craft:'capsule'},
+      'mars-spirit-opportunity':{type:'mars-rover',label:'SPIRIT & OPPORTUNITY',step:'The twin rovers roll across Mars, stopping to investigate rocks and clues about ancient water.',world:'mars',craft:'rover'},
+      'mars-viking':{type:'viking',label:'VIKING LANDERS · 1976',step:'A Viking lander descends to Mars and begins its long study of the planet’s surface and atmosphere.',world:'mars',craft:'lander'},
+      'mars-phoenix-insight':{type:'lander',label:'PHOENIX & INSIGHT',step:'A stationary lander reaches the surface and begins its scientific work: digging into soil or listening for marsquakes.',world:'mars',craft:'lander'},
+      'mars-ingenuity':{type:'flight',label:'INGENUITY · FIRST FLIGHT ON MARS',step:'Ingenuity lifts above the Martian ground, flies through the thin atmosphere, then returns to the surface.',world:'mars',craft:'helicopter'},
+      'other-dawn':{type:'orbit',label:'DAWN · VESTA TO CERES',step:'Dawn uses ion propulsion to travel between worlds, then circles Ceres to map its surface.',world:'space',craft:'probe'},
+      'other-near-shoemaker':{type:'asteroid',label:'NEAR SHOEMAKER · EROS',step:'The spacecraft approaches asteroid Eros, descends carefully, and makes its historic touchdown.',world:'asteroid',craft:'probe'},
+      'other-pioneer':{type:'deep',label:'PIONEER · OUTER SOLAR SYSTEM',step:'The probe passes the giant planets and continues outward on its long journey through space.',world:'space',craft:'probe'},
+      'other-kepler':{type:'telescope',label:'KEPLER · SEARCHING FOR WORLDS',step:'The space telescope points toward a field of stars and watches for tiny dips in starlight caused by distant planets.',world:'space',craft:'telescope'}
+    };
+    function craftSvg(kind){
+      const shapes={
+        apollo:'<g fill="#d8dce5" stroke="#52647b" stroke-width="2"><path d="M0 -27 L15 5 L0 15 L-15 5Z"/><path d="M-15 5 L-25 22 L25 22 L15 5Z" fill="#b98c58"/><path d="M-20 20 L-29 32 M20 20 L29 32" stroke="#e5c58e" stroke-width="4"/><circle cy="-8" r="5" fill="#72dffb"/></g>',
+        rover:'<g stroke="#dce8f5" stroke-width="3" fill="#d6b77a"><rect x="-25" y="-12" width="50" height="20" rx="5"/><path d="M-18 -12 L-8 -26 L8 -26 L18 -12" fill="#8acfe0"/><path d="M-22 8 L-28 22 M22 8 L28 22"/><circle cx="-25" cy="24" r="8" fill="#29384a"/><circle cx="25" cy="24" r="8" fill="#29384a"/><path d="M0 -26 V-39"/></g>',
+        antenna:'<g stroke="#e8edf6" stroke-width="3" fill="none"><path d="M0 25 V-12 M-22 25 H22 M-14 -12 Q0 -35 14 -12 M-20 -18 Q0 -48 20 -18"/><circle cy="-12" r="5" fill="#72dffb"/></g>',
+        lander:'<g stroke="#dce6f2" stroke-width="3" fill="#c8d2df"><path d="M-17 -12 L0 -30 L17 -12 L12 12 H-12Z"/><path d="M-12 8 L-29 29 M12 8 L29 29 M-29 29 H-18 M29 29 H18" fill="none"/><circle cy="-7" r="5" fill="#73dffb"/></g>',
+        capsule:'<g stroke="#e9eef8" stroke-width="2" fill="#d9e1e9"><path d="M0 -27 Q23 -10 18 17 L-18 17 Q-23 -10 0 -27Z"/><path d="M-18 8 L-30 25 M18 8 L30 25"/><path d="M-22 -10 L-34 -20 M22 -10 L34 -20" stroke="#f0a46c" stroke-width="5"/></g>',
+        helicopter:'<g stroke="#e9f3fb" stroke-width="3" fill="#d5e5ed"><rect x="-13" y="-8" width="26" height="16" rx="5"/><path d="M0 -8 V-20 M-36 -22 H36 M0 8 V23 M-20 23 H20"/><path d="M13 0 L30 8"/><circle cx="30" cy="8" r="3" fill="#72dffb"/></g>',
+        probe:'<g stroke="#e5edf8" stroke-width="2" fill="#d5a75e"><rect x="-11" y="-14" width="22" height="28" rx="4"/><path d="M-11 -5 L-37 -15 V15 L-11 5 M11 -5 L37 -15 V15 L11 5" fill="#397ca0"/><path d="M0 -14 V-30 M-8 -30 H8"/><circle cy="0" r="5" fill="#72dffb"/></g>',
+        telescope:'<g stroke="#e7edf5" stroke-width="3" fill="#b9c8d8"><path d="M-24 -10 L20 -18 L28 0 L-16 8Z"/><path d="M-16 8 L-24 17 M20 -18 L28 -28"/><rect x="-34" y="-15" width="12" height="27" rx="3" fill="#72dffb"/><path d="M28 -4 L42 -4"/></g>'
+      };return `<svg viewBox="-50 -50 100 100" aria-hidden="true">${shapes[kind]||shapes.probe}</svg>`;
+    }
+    function renderMissionCinema(m){
+      const cfg=missionScenes[m.id]||{type:'deep',label:'MISSION REENACTMENT',step:'Follow the spacecraft as it travels through space.',world:'space',craft:'probe'};
+      const world=cfg.world==='moon'?'<div class="cinema-moon"></div><div class="cinema-ground"></div>':cfg.world==='mars'?'<div class="cinema-mars"></div><div class="cinema-ground red"></div>':cfg.world==='asteroid'?'<div class="cinema-moon" style="width:115px;height:115px;right:12%;bottom:8%"></div>':'<div class="cinema-earth"></div><div class="cinema-moon"></div>';
+      const isApollo=cfg.type==='apollo';
+      const craft=isApollo?`<div class="cinema-object apollo-descent">${craftSvg('apollo')}</div><div class="cinema-object apollo-ascent">${craftSvg('apollo')}</div><div class="cinema-object apollo-stage" style="left:67%;top:69%;font-size:24px">▰</div>`:`<div class="cinema-object ${cfg.type==='moon-rover'||cfg.type==='mars-rover'?'moving-rover':cfg.type==='deploy'?'deploy-unit':cfg.type==='surveyor'||cfg.type==='viking'||cfg.type==='lander'?'landing-probe':cfg.type==='pathfinder'?'entry-capsule':cfg.type==='flight'?'flying-craft':cfg.type==='orbit'?'orbit-craft':cfg.type==='asteroid'?'asteroid-craft':cfg.type==='deep'?'deep-craft':'telescope-craft'}">${craftSvg(cfg.craft)}</div>`;
+      const el=document.getElementById('missionCinema');el.dataset.scene=cfg.type;el.innerHTML=`<div class="cinema-stars"></div>${world}<div class="cinema-trail"></div><div class="cinema-label">${cfg.label}</div><div class="cinema-scene">${craft}</div><div class="cinema-caption"><b>MISSION IN MOTION</b>${cfg.step}</div>`;
+    }
+    function replayMissionCinema(){const el=document.getElementById('missionCinema');el.querySelectorAll('.cinema-object').forEach(n=>{n.style.animation='none';void n.offsetWidth;n.style.animation='';});}
+
+    function openStoryMission(m){
+      currentStoryMission=m;quizAnswered=false;storyState.visited=Array.from(new Set([...storyState.visited,m.id]));
+      if(storyState.visited.length>=5)awardBadge('curious','Curious Explorer');saveStory();
+      document.getElementById('storyModalKicker').textContent='MISSION LOG · '+storyNames[m.planet].toUpperCase();document.getElementById('storyModalTitle').textContent=m.title;
+      document.getElementById('storyModalText').textContent=`Explorer, we've found a human-made footprint. ${m.summary}\n\n${m.description}`;
+      const img=document.getElementById('storyModalImage');if(m.image){img.src=m.image;img.alt=m.title;}else{img.removeAttribute('src');}
+      document.getElementById('storyFact').textContent='MISSION RECORD · '+m.year+' · '+m.status+'\n\nThis historical information comes from the linked NASA mission reference. The adventure framing is fictional; the mission facts are not.';
+      document.getElementById('storySource').href=m.source;
+      renderMissionCinema(m);
+      const q=chapterQuizzes[m.planet];document.getElementById('quizQuestion').textContent=q.q;document.getElementById('quizFeedback').textContent='Choose the answer you think is correct.';
+      const options=document.getElementById('quizOptions');options.innerHTML='';q.o.forEach((answer,index)=>{const b=document.createElement('button');b.className='quiz-option';b.textContent=String.fromCharCode(65+index)+'. '+answer;b.addEventListener('click',()=>{if(quizAnswered)return;quizAnswered=true;if(index===q.a){b.classList.add('correct');document.getElementById('quizFeedback').textContent='Correct! '+q.why;awardBadge('quiz','Sharp Mind');completeChapter();}else{b.classList.add('wrong');options.children[q.a].classList.add('correct');document.getElementById('quizFeedback').textContent='Not quite. '+q.why;} });options.appendChild(b);});
+      document.getElementById('storyModal').classList.add('open');document.getElementById('storyClose').focus();
+    }
+    function closeStoryModal(){document.getElementById('storyModal').classList.remove('open');}
+    function completeChapter(){const q=chapterQuizzes[currentChapter];if(!storyState.chapters.includes(currentChapter)){storyState.chapters.push(currentChapter);awardBadge(currentChapter,currentChapter==='moon'?'Moon Explorer':currentChapter==='mars'?'Mars Pioneer':'Deep Space Scout');saveStory();}document.getElementById('novaMessage').textContent=`Chapter complete! You've explored ${storyNames[currentChapter]}. Your discoveries have been saved on this device.`;toastStory('Chapter completed — progress saved!');}
+    document.querySelectorAll('.chapter-card').forEach(card=>card.addEventListener('click',()=>{const ch=card.dataset.chapter;renderStoryMissions(ch);}));
+    document.getElementById('showAllMissions').addEventListener('click',()=>{document.getElementById('missionEyebrow').textContent='FULL DISCOVERY INDEX';document.getElementById('missionHeading').textContent='All recorded footprints';document.getElementById('missionSub').textContent='Browse every selected NASA heritage record.';const box=document.getElementById('storyMissions');box.innerHTML='';missions.forEach(m=>{const c=document.createElement('article');c.className='story-mission';c.innerHTML=`${m.image?`<img src="${m.image}" alt="${m.title}" loading="lazy">`:''}<div class="story-mission-content"><small>${storyNames[m.planet].toUpperCase()} · ${m.year}</small><h3>${m.title}</h3><p>${m.summary}</p><span class="mission-open">OPEN DISCOVERY →</span></div>`;c.addEventListener('click',()=>openStoryMission(m));box.appendChild(c);});});
+    document.getElementById('replayCinema').addEventListener('click',replayMissionCinema);
+    document.getElementById('storyClose').addEventListener('click',closeStoryModal);document.getElementById('nextStoryMission').addEventListener('click',closeStoryModal);document.getElementById('storyModal').addEventListener('click',e=>{if(e.target.id==='storyModal')closeStoryModal();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStoryModal();});
+    document.getElementById('startJourney').addEventListener('click',()=>document.getElementById('chapters').scrollIntoView({behavior:'smooth'}));document.getElementById('scrollChapters').addEventListener('click',()=>document.getElementById('chapters').scrollIntoView({behavior:'smooth'}));
+    function showArchive(){storyApp.classList.add('hidden');archive.style.display='block';archiveBar.style.display='flex';window.scrollTo(0,0);}
+    function showStory(){storyApp.classList.remove('hidden');archive.style.display='none';archiveBar.style.display='none';window.scrollTo(0,0);}
+    document.getElementById('openArchiveTop').addEventListener('click',showArchive);document.getElementById('backToStory').addEventListener('click',showStory);
+    function observeReveals(){const nodes=document.querySelectorAll('#storyApp .reveal:not(.visible)');if(!('IntersectionObserver'in window)){nodes.forEach(n=>n.classList.add('visible'));return;}const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.12});nodes.forEach(n=>io.observe(n));}
+    observeReveals();updateStoryProgress();
+    // A gentle pointer parallax on desktop; disabled for touch and reduced-motion users.
+    if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5)*8,y=(e.clientY/innerHeight-.5)*8;const world=document.querySelector('.hero-world');if(world)world.style.translate=`${x}px ${y}px`;});}
 
   </script>
 
