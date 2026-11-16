@@ -964,7 +964,7 @@
     <div class="story-bg"></div><div class="story-stars"></div>
     <div class="story-wrap">
       <header class="story-top">
-        <div class="story-logo">✦ SPACE HERITAGE<small>THE LOST FOOTPRINTS · INTERACTIVE EXPEDITION</small></div>
+        <div class="story-logo"> SPACE HERITAGE<small>THE LOST FOOTPRINTS · INTERACTIVE EXPEDITION</small></div>
         <div class="story-top-actions"><span class="story-pill">EXPLORER LEVEL <b id="explorerLevel">01</b></span><button class="story-btn" id="openArchiveTop">NASA ARCHIVE ↗</button></div>
       </header>
       <section class="story-hero">
@@ -976,7 +976,7 @@
         </div>
         <div class="hero-art" aria-label="Illustration of planets in space"><div class="hero-orbit"></div><div class="hero-world"></div><div class="hero-moon"></div><div class="hero-mars"></div></div>
       </section>
-      <section class="guide-row reveal"><div class="guide-avatar">✦</div><div class="guide-copy"><b>Meet NOVA — your mission guide</b><p id="novaMessage">Hello, explorer! I'm NOVA. I'll guide you through the places where human-made machines still rest. Ready to uncover their stories?</p></div></section>
+      <section class="guide-row reveal"><div class="guide-avatar"></div><div class="guide-copy"><b>Meet NOVA — your mission guide</b><p id="novaMessage">Hello, explorer! I'm NOVA. I'll guide you through the places where human-made machines still rest. Ready to uncover their stories?</p></div></section>
       <section class="story-section" id="chapters">
         <div class="story-section-head"><div><div class="story-kicker">Your expedition map</div><h2>Choose your next destination</h2><p class="story-sub">Every world holds a chapter. Explore them in any order and collect your discoveries.</p></div><div class="progress-panel"><div class="progress-ring" id="progressRing"><span id="progressPercent">0%</span></div><div class="progress-copy"><b id="progressTitle">Your journey begins</b><small id="progressDetail">0 of 3 chapters completed</small></div></div></div>
         <div class="chapter-grid">
@@ -1104,7 +1104,7 @@
           </button>
 
           <button class="tab" data-planet="other" role="tab" aria-selected="false">
-            ✦ Asteroids & Deep Space
+             Asteroids & Deep Space
           </button>
         </div>
       </div>
@@ -1184,7 +1184,7 @@
       <div class="mission-media" id="missionMedia">
         <img id="missionImage" alt="Mission photograph">
         <div class="mission-media-empty" id="missionImageEmpty" hidden>
-          <span class="media-icon">✦</span>
+          <span class="media-icon"></span>
           <strong>Mission image unavailable</strong>
           <span>No photograph is configured for this mission.</span>
         </div>
@@ -1849,7 +1849,7 @@ NASA retired the telescope in 2018. Kepler remains in an Earth-trailing orbit, c
     function renderStoryMissions(chapter){
       currentChapter=chapter;const list=missions.filter(m=>m.planet===chapter);document.getElementById('missionEyebrow').textContent='CHAPTER · '+storyNames[chapter].toUpperCase();document.getElementById('missionHeading').textContent=chapter==='moon'?'The footprints on the Moon':chapter==='mars'?'Secrets of the Red Planet':'Messages from deep space';document.getElementById('missionSub').textContent='Open a discovery to read its story, explore the NASA facts, and test what you learned.';
       const container=document.getElementById('storyMissions');container.innerHTML='';
-      list.forEach((m,i)=>{const card=document.createElement('article');card.className='story-mission reveal';card.innerHTML=`${m.image?`<img src="${m.image}" alt="${m.title}" loading="lazy">`:'<div style="height:150px;display:grid;place-items:center;font-size:38px">✦</div>'}<div class="story-mission-content"><small>DISCOVERY ${String(i+1).padStart(2,'0')} · ${m.year}</small><h3>${m.title}</h3><p>${m.summary}</p><span class="mission-open">OPEN DISCOVERY →</span></div>`;card.addEventListener('click',()=>openStoryMission(m));container.appendChild(card);});
+      list.forEach((m,i)=>{const card=document.createElement('article');card.className='story-mission reveal';card.innerHTML=`${m.image?`<img src="${m.image}" alt="${m.title}" loading="lazy">`:'<div style="height:150px;display:grid;place-items:center;font-size:38px"></div>'}<div class="story-mission-content"><small>DISCOVERY ${String(i+1).padStart(2,'0')} · ${m.year}</small><h3>${m.title}</h3><p>${m.summary}</p><span class="mission-open">OPEN DISCOVERY →</span></div>`;card.addEventListener('click',()=>openStoryMission(m));container.appendChild(card);});
       observeReveals();document.getElementById('discoveries').scrollIntoView({behavior:'smooth',block:'start'});
       document.getElementById('novaMessage').textContent=`Great choice! We're exploring ${storyNames[chapter]}. Open the discoveries, look for clues, and answer the mission check to earn your explorer badge.`;
     }
